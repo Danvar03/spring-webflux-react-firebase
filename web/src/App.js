@@ -25,7 +25,7 @@ apiKey: "AIzaSyDKQxZQgJ3vJ-yzU9Bdj10PFX9njjiPWFk",
   projectId: "question-adn-aswer",
   storageBucket: "question-adn-aswer.appspot.com",
   messagingSenderId: "901831785121",
-  appId: "1:901831785121:web:4e2e4066a5f22976cccee0"
+  appId: "1:901831785121:web:7042b1aa8e26dc15cccee0"
 });
 
 const auth = firebase.auth();
