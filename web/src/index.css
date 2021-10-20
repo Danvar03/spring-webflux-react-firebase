@@ -104,4 +104,9 @@ body {
   .right {
     float: right;
   }
-  
+  .logo img{
+    float: right;
+    margin-right: 300px;
+    margin-top: -80px;
+    width: 200px ; 
+  }
