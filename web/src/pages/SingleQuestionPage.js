@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Swal from 'sweetalert2'
 
 import { fetchQuestion, deleteAnswer } from '../actions/questionActions'
+import QuestionReviewForm from "../components/QuestionReviewForm";
 
 import { Question } from '../components/Question'
 import { Answer } from '../components/Answer'
@@ -47,8 +48,13 @@ const SingleQuestionPage = ({
     if (loading.question) return <p>Loading question...</p>
     if (hasErrors.question) return <p>Unable to display question.</p>
 
-    return <Question question={question} />
-  }
+    return (
+      <div>
+        <Question question={question} />{" "}
+        <QuestionReviewForm question={question} />
+      </div>
+       );
+      };
 
   const renderAnswers = () => {
     return (question.answers && question.answers.length) ? question.answers.map(answer => (

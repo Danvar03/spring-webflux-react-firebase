@@ -11,9 +11,8 @@ const HomePage = ({children}) => (
       {children}
     </div>
     <p>welcome to the question and answer app.</p>
-    <Link to="/questions" className="button">
-      View Questions
-    </Link>  
+    <div clasName ="homecenter">    
+    </div>  
   </section>  
   </Fragment>
 

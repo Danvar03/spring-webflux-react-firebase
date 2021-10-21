@@ -1,24 +1,8 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import logo from "../img/logo.png";
-import { logout } from "../actions/authActions";
-import { auth } from "../config/firebase";
 
-function SignOut({ dispatch }) {
-  return (
-    auth.currentUser && (
-      <button
-        className="button right"
-        onClick={() => {
-          dispatch(logout());
-          auth.signOut();
-        }}
-      >
-        Sign out
-      </button>
-    )
-  );
-}
+
 
 export const PublicNavbar = () => (
   <Fragment>

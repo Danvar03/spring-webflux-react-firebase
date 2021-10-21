@@ -35,6 +35,9 @@ const App = ({ dispatch }) => {
         <>
           <PrivateNavbar />
           <Switch>
+          <Route exact path="/" component={() => {
+              return <HomePage></HomePage>
+            }} />
             <Route exact path="/questions" component={QuestionsPage} />
             <Route exact path="/question/:id" component={SingleQuestionPage} />
             <Route exact path="/list" component={OwnerQuestionsPage} />
@@ -47,6 +50,9 @@ const App = ({ dispatch }) => {
         <>
           <PublicNavbar />
           <Switch>
+          <Route exact path="/" component={() => {
+              return <HomePage></HomePage>
+            }} />          
             <Route exact path="/questions" component={QuestionsPage} />
             <Route exact path="/question/:id" component={SingleQuestionPage} />
             <Route exact path="/answer/:id" component={AnswerFormPage} />
