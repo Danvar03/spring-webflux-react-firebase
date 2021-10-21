@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import {signInWithGoogle,signin} from "../config/auth";
-
+import { signInWithGoogle, signin } from "../config/auth";
 
 export default class Login extends Component {
   constructor(props) {
@@ -12,7 +11,7 @@ export default class Login extends Component {
       password: "",
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);    
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
@@ -31,32 +30,24 @@ export default class Login extends Component {
     }
   }
 
-
-    async googleSignIn() {
+  async googleSignIn() {
     try {
       await signInWithGoogle();
     } catch (error) {
-      
       this.setState({ error: error.message });
     }
   }
-  
+
   render() {
     return (
-      <div className="home-app">
-      
-     <form
-       className="mt-5 py-5 px-5"
-       autoComplete="off"
-       onSubmit={this.handleSubmit}
-     >
-          <h1>
-            Iniciar Sesión
-            
-          </h1>
-          <p className="lead">
-            Complete el siguiente formulario para iniciar sesión en su cuenta.
-          </p>
+      <div class="login-wrap">
+        <form
+          className="mt-5 py-5 px-5"
+          autoComplete="off"
+          onSubmit={this.handleSubmit}
+        >
+          <h1>Iniciar Sesión</h1>
+          <p className="lead">Complete elformulario para iniciar sesión</p>
           <div className="form-group container-input">
             <input
               className="form-control"
@@ -65,7 +56,6 @@ export default class Login extends Component {
               type="email"
               onChange={this.handleChange}
               value={this.state.email}
-
             />
             <input
               className="form-control"
@@ -77,9 +67,12 @@ export default class Login extends Component {
             />
           </div>
 
-          {this.state.error ? <p className="text-danger">{this.state.error}</p> : null}
-            <button className="boton-login px-5" type="submit">Iniciar</button>
-
+          {this.state.error ? (
+            <p className="text-danger">{this.state.error}</p>
+          ) : null}
+          <button className="boton-login px-5" type="submit">
+            Iniciar
+          </button>
 
           <button
             className="boton-cerrar"
@@ -89,11 +82,13 @@ export default class Login extends Component {
             Iniciar sesión con Google
           </button>
           <p>
-            ¿No tienes una cuenta? <Link to="/register">Registrate</Link>
+            ¿No tienes una cuenta?{" "}
+            <Link className="a" to="/register">
+              Registrate
+            </Link>
           </p>
-      
+
           <hr />
-         
         </form>
       </div>
     );

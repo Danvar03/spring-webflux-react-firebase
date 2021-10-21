@@ -41,14 +41,14 @@ export default class Register extends Component {
   
   render() {
     return (
-      <div className="home-app">
+      <div class="login-wrap">
         <form form className="mt-5 py-5 px-5" onSubmit={this.handleSubmit}>
           <h1>
           Registrar Sesión
             
           </h1>
           <p className="lead">
-            Complete el siguiente formulario para iniciar sesión en su cuenta.
+            Complete el formulario para registrarte.
           </p>
           <div className="form-group container-input">
             <input
