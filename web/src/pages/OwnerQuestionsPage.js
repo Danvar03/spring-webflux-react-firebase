@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import Swal from 'sweetalert2'
 
-import { fetchOwnerQuestions, deleteQuestion } from '../actions/questionActions'
+import { fetchOwnerQuestions, deleteQuestion, } from '../actions/questionActions'
 import { Question } from '../components/Question'
 
 const OwnerQuestionsPage = ({ dispatch, loading, questions, hasErrors, redirect, userId }) => {
@@ -18,7 +18,7 @@ const OwnerQuestionsPage = ({ dispatch, loading, questions, hasErrors, redirect,
 
     const onDelete = (id) => {       
         Swal.fire({
-            title: 'Delete Question?',
+            title: 'Delete Answer?',
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
