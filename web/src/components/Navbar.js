@@ -1,30 +1,77 @@
-import React, { Fragment } from 'react'
-import { Link } from 'react-router-dom'
-import logo from '../img/logo.png'
+import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
+import logo from "../img/logo.png";
+import { logout } from "../actions/authActions";
+import { auth } from "../config/firebase";
 
+function SignOut({ dispatch }) {
+  return (
+    auth.currentUser && (
+      <button
+        className="button right"
+        onClick={() => {
+          dispatch(logout());
+          auth.signOut();
+        }}
+      >
+        Sign out
+      </button>
+    )
+  );
+}
 
 export const PublicNavbar = () => (
-  <Fragment>     
-  <nav>   
-    <section>
-      <Link to="/">Home</Link>
-      <Link to="/questions">Questions</Link>
-    </section>
-  </nav>
-  <div className= "logo">  <img src={logo}  alt="logo" /></div>
-  
+  <Fragment>
+    <nav>
+      <section>
+        <Link className="nav-item mr-3 btn btn-outline-light px-4" to="/">
+          Home <i className="bi bi-house" />
+        </Link>
+        <Link
+          className="nav-item mr-3 btn btn-outline-light px-4"
+          to="/questions"
+        >
+          Questions
+        </Link>
+        <Link
+          className="nav-item mr-3 btn btn-outline-light px-4"
+          to={"/login"}
+        >
+          Log In <i className="bi bi-box-arrow-right" />
+        </Link>
+      </section>
+    </nav>
+    <div className="logo">
+      {" "}
+      <img src={logo} alt="logo" />
+    </div>
   </Fragment>
-)
+);
 
 export const PrivateNavbar = () => (
-  <nav>
-<img src='/public/img/favicon.png' className="App-logo" alt="logo" />
-    <section>
-    
-      <Link to="/">Home</Link>
-      <Link to="/questions">Questions</Link>
-      <Link to="/new">New</Link>
-      <Link to="/list">List</Link>
-    </section>
-  </nav>
-)
+  <Fragment>
+    <nav>
+      <section>
+        <Link className="nav-item mr-3 btn btn-outline-light px-4" to="/">
+          Home
+        </Link>
+        <Link
+          className="nav-item mr-3 btn btn-outline-light px-4"
+          to="/questions"
+        >
+          Questions
+        </Link>
+        <Link className="nav-item mr-3 btn btn-outline-light px-4" to="/new">
+          New
+        </Link>
+        <Link className="nav-item mr-3 btn btn-outline-light px-4" to="/list">
+          List
+        </Link>
+      </section>
+    </nav>
+    <div className="logo">
+      {" "}
+      <img src={logo} alt="logo" />
+    </div>
+  </Fragment>
+);

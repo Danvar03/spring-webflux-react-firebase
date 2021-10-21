@@ -19,15 +19,9 @@ import AnswerFormPage from './pages/AnswerFormPage'
 import OwnerQuestionsPage from './pages/OwnerQuestionsPage'
 import { useAuthState } from "react-firebase-hooks/auth";
 import  Footer from "./components/Footer"
+import LoginPage from "./pages/LoginPage"
+import Register from "./pages/Register"
 
-firebase.initializeApp({
-apiKey: "AIzaSyDKQxZQgJ3vJ-yzU9Bdj10PFX9njjiPWFk",
-  authDomain: "question-adn-aswer.firebaseapp.com",
-  projectId: "question-adn-aswer",
-  storageBucket: "question-adn-aswer.appspot.com",
-  messagingSenderId: "901831785121",
-  appId: "1:901831785121:web:7042b1aa8e26dc15cccee0"
-});
 
 const auth = firebase.auth();
 
@@ -54,6 +48,7 @@ const App = ({ dispatch }) => {
           </Switch>
         </> :
         <>
+        
           <PublicNavbar />
           <Switch>
             <Route exact path="/" component={() => {
@@ -62,7 +57,13 @@ const App = ({ dispatch }) => {
             <Route exact path="/questions" component={QuestionsPage} />
             <Route exact path="/question/:id" component={SingleQuestionPage} />
             <Route exact path="/answer/:id" component={AnswerFormPage} />
-            <Redirect to="/" />
+            
+            <Route exact path="/login" component={LoginPage} />
+           
+            <Route exact path="/register" component={Register} />
+          
+            
+          
           </Switch>
         </>
       }
@@ -70,6 +71,7 @@ const App = ({ dispatch }) => {
     </Router>
   )
 }
+
 
 
 function SignIn() {

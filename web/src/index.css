@@ -111,5 +111,28 @@ body {
     width: 200px ; 
   }
   .footer{
-    margin-top:30%;
+    margin-top:10%;
+  }
+  .boton-login {
+    margin-right: 12px;
+    margin-bottom: 10pxs;
+    outline: none;
+    padding: 9px;
+    border: none; 
+    text-decoration: none;
+    background: #0a7934;
+    color: white;
+    border-radius: 6px;
+  }
+  
+  .boton-cerrar {
+    margin-right: 12px;
+    margin-bottom: 10pxs;
+    outline: none;
+    padding: 9px;
+    border: none; 
+    text-decoration: none;
+    background: #bb280f;
+    color: white;
+    border-radius: 6px;
   }
