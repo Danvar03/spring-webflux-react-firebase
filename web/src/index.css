@@ -5,9 +5,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-p {
+/* p {
   font-size: 1.1rem;
-}
+} */
 
 nav {
   display: flex;
