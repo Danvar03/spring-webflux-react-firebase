@@ -1,38 +1,30 @@
 package co.com.sofka.questions.usecases;
 
 import co.com.sofka.questions.collections.Question;
-import co.com.sofka.questions.model.QuestionDTO;
 import co.com.sofka.questions.reposioties.QuestionRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
-import reactor.core.publisher.Mono;
-import static org.mockito.Mockito.when;
+import reactor.core.publisher.Flux;
+import org.junit.jupiter.api.Assertions;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class UpdateUseCaseTest {
-
-    @SpyBean
-    private UpdateUseCase updateUseCase;
+class ListUseCaseTest {
 
     @MockBean
-    private QuestionRepository repository;
+    QuestionRepository questionRepository;
+
+    @SpyBean
+    ListUseCase listUseCase;
+
 
     @Test
-    void updateTest(){
-
-        var resourceDT0 = new QuestionDTO("xxx", "yyy", "Que es Java?", "tecnologia",
-                "TECNOLOGIA", 1, 2, Arrays.asList("xxx1", "xxx2"), "daniela.03v@gmail.com");
-
+    void getAllTest(){
         var resource = new Question();
         resource.setId("xxx");
         resource.setUserId("yyy");
@@ -43,10 +35,16 @@ class UpdateUseCaseTest {
         resource.setSumOfReviewScores(1);
         resource.setUserReviews(Arrays.asList("xxx1", "xxx2"));
         resource.setUserEmail("daniela.03v@gmail.com");
-        when(repository.save(Mockito.any(Question.class))).thenReturn(Mono.just(resource));
-        var result = updateUseCase.apply(resourceDT0);
-        Assertions.assertEquals(Objects.requireNonNull(result.block()),"xxx");
+
+        Mockito.when(questionRepository.findAll()).thenReturn(Flux.just(resource ));
+
+        var resultQuestionDTO =  listUseCase.get().collectList().block();
+
+        assert resultQuestionDTO != null;
+        Assertions.assertEquals(resultQuestionDTO.get(0).getId(), resource.getId());
+        Assertions.assertEquals(resultQuestionDTO.get(0).getUserId(), resource.getUserId());
+        Assertions.assertEquals(resultQuestionDTO.get(0).getQuestion(), resource.getQuestion());
+        Assertions.assertEquals(resultQuestionDTO.get(0).getType(), resource.getType());
+        Assertions.assertEquals(resultQuestionDTO.get(0).getCategory(), resource.getCategory());
     }
-
-
 }

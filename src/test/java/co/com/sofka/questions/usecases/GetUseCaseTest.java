@@ -27,16 +27,20 @@ class GetUseCaseTest {
 
         var questionDTO = new QuestionDTO("1", "yyy", "Que es Java?", "tecnologia",
                 "TECNOLOGIA", 1, 2, Arrays.asList("xxx1", "xxx2"), "daniela.03v@gmail.com");
-        var question= new Question();
-        question.setId("1");
-        question.setQuestion("What is a framework?");
-        question.setUserId("1");
-        question.setType("OPEN");
-        question.setCategory("TECHNOLOGY AND COMPUTER");
+        var resource= new Question();
+        resource.setId("xxx");
+        resource.setUserId("yyy");
+        resource.setQuestion("Que es Java?");
+        resource.setType("tecnologia");
+        resource.setCategory("TECNOLOGIA");
+        resource.setNumberOfReviews(1);
+        resource.setSumOfReviewScores(1);
+        resource.setUserReviews(Arrays.asList("xxx1", "xxx2"));
+        resource.setUserEmail("daniela.03v@gmail.com");
 
-        Mockito.when(questionRepository.findById(Mockito.any(String.class))).thenReturn(Mono.just(question));
+        Mockito.when(questionRepository.findById(Mockito.any(String.class))).thenReturn(Mono.just(resource));
 
         var respuesta = getQuestion.apply("1");
-        Assertions.assertEquals(respuesta.block().getQuestion(), "What is a framework?");
+        Assertions.assertEquals(respuesta.block().getQuestion(), "Que es Java?");
     }
 }

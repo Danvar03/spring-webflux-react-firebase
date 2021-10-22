@@ -2,6 +2,7 @@ package co.com.sofka.questions.usecases;
 
 import co.com.sofka.questions.collections.Answer;
 import co.com.sofka.questions.model.AnswerDTO;
+import co.com.sofka.questions.model.QuestionDTO;
 import co.com.sofka.questions.reposioties.AnswerRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -12,36 +13,43 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import reactor.core.publisher.Mono;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class AddAnswerUseCaseTest {
 
-    @MockBean
-    private AnswerRepository answerRepository;
-
     @SpyBean
-    private AddAnswerUseCase addAnswerUseCase;
+    AddAnswerUseCase addAnswerUseCase;
 
+    @MockBean
+    GetUseCase getUseCase;
+
+    @MockBean
+    AnswerRepository answerRepository;
 
     @Test
-    @DisplayName("consultar respuestas CRUD use case")
-    public void setAddAnswerUseCaseTest(){
-        var answerDTO = new AnswerDTO("zzz","xxx", "yyy", "Desarollar");
+    void answerTest(){
+        var resource = new QuestionDTO("xxx", "yyy", "Que es Java?", "tecnologia",
+                "TECNOLOGIA", 1, 2, Arrays.asList("xxx1", "xxx2"), "daniela.03v@gmail.com");
+
+        var answerDTO = new AnswerDTO("xxx","yyy","yyy","test");
         var answer = new Answer();
-        answer.setId("zzz");
-        answer.setQuestionId("xxx");
-        answer.setUserId("yyy");
-        answer.setAnswer("Desarollar");
-
-
+        answer.setId("01");
+        answer.setQuestionId("01");
+        answer.setUserId("u01");
+        answer.setAnswer("test");
         Mockito.when(answerRepository.save(Mockito.any(Answer.class))).thenReturn(Mono.just(answer));
-        var  datoAnswer = addAnswerUseCase.apply(answerDTO).block();
-        Assertions.assertEquals(datoAnswer.getId(), "zzz");
-        Assertions.assertEquals(datoAnswer.getId(), "xxx");
-        Assertions.assertEquals(datoAnswer.getUserId(), "yyy");
-        Assertions.assertEquals(datoAnswer.getAnswers(), "Desarollar");
-
+        Mockito.when(getUseCase.apply(Mockito.anyString())).thenReturn(Mono.just(resource));
+        var reusultDTO = addAnswerUseCase.apply(answerDTO);
+        var resultQuestionDTO = reusultDTO.block();
+        assert resultQuestionDTO != null;
+        Assertions.assertEquals(resultQuestionDTO.getId(),resource.getId());
+        Assertions.assertEquals(resultQuestionDTO.getQuestion(),resource.getQuestion());
+        Assertions.assertEquals(resultQuestionDTO.getAnswers().get(0).getQuestionId(),answerDTO.getQuestionId());
 
     }
+
 }
+

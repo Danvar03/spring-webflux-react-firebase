@@ -30,12 +30,11 @@ class DeleteUseCaseTest {
     @Test
     public void delete(){
 
-        var questionDTO = new QuestionDTO("1", "yyy", "Que es Java?", "tecnologia",
-                "TECNOLOGIA", 1, 2, Arrays.asList("xxx1", "xxx2"), "daniela.03v@gmail.com");
+        var answerDTO = new AnswerDTO("xxx","yyy","yyy","tecnologia");
         var answer = new AnswerDTO();
         answer.setQuestionId("1");
-        answer.setUserId("1");
-        answer.setAnswer("It's a programming language");
+        answer.setUserId("yyy");
+        answer.setAnswer("tecnologia");
 
         Mockito.when(questionRepository.deleteById("1")).thenReturn(Mono.empty());
         Mockito.when(answerRepository.deleteByQuestionId("1")).thenReturn(Mono.empty());
