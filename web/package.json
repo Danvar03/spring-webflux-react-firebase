@@ -5,6 +5,8 @@
     "keywords": [],
     "main": "src/index.js",
     "dependencies": {
+        "@fortawesome/react-fontawesome": "^0.1.16",
+        "axios": "^0.23.0",
         "firebase": "^8.3.3",
         "jodit": "^3.8.6",
         "jodit-react": "^1.1.5",
