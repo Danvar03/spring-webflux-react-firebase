@@ -1,8 +1,10 @@
-import React from 'react'
+import React from "react";
 
-export const Answer = ({ answer ,userId, onDelete}) => (
+export const Answer = ({ answer, userId, onDelete }) => (
   <aside className="answer">
-    <p>{answer.answer}</p>
-    {answer.userId === userId&&<button className="boton-cerrar" onClick={()=> onDelete(answer.id)} >Delete</button>}
+    <div dangerouslySetInnerHTML={{__html:answer.answer}} />
+    {answer.userId === userId && <button className="button" onClick={() => onDelete(answer.id)}>DELETE</button>}
   </aside>
-)
+
+
+);
