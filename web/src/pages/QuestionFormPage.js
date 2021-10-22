@@ -23,10 +23,7 @@ const FormPage = ({ dispatch, loading, redirect, userId,userEmail }) => {
     const { register, handleSubmit } = useForm();
     const history = useHistory();
 
-    // const onSubmit = data => {
-    //     data.userId = userId;
-    //     dispatch(postQuestion(data));
-    // };
+  
 
     const onSubmit = e => {
         e.preventDefault();
@@ -81,9 +78,7 @@ const FormPage = ({ dispatch, loading, redirect, userId,userEmail }) => {
 
                 <div>
                     <label for="question">Question</label>
-                    <Input id="question" setContent={setContent}/>
-
-                    {/* <textarea id="question" {...register("question", { required: true, maxLength: 300 })} /> */}
+                    <Input id="question" setContent={setContent}/>            
                 </div>
                 <button type="submit" className="boton-login" disabled={loading} >{
                     loading ? "Saving ...." : "Save"
