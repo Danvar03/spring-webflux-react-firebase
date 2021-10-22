@@ -34,7 +34,7 @@ export default class Login extends Component {
     try {
       await signInWithGoogle();
     } catch (error) {
-      this.setState({ error: error.message });
+     
     }
   }
 

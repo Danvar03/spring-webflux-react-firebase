@@ -43,10 +43,10 @@ public class AddAnswerUseCase implements SaveAnswer {
                 answerRepository.save(mapperUtils.mapperToAnswer().apply(answerDTO))
                         .map(answer -> {
                             question.getAnswers().add(answerDTO);
-                            System.out.println(question.getUserEmail() + "email");
                             var res = sendEmail(question.getUserEmail(), "Tienes una nueva respuesta a tu pregunta", "Vuelve a Q&A.com para revisar tu nueva respuesta! " + question.getQuestion());
                             return question;
                         })
         );
     }
+
 }
