@@ -1,7 +1,10 @@
 package co.com.sofka.questions.usecases;
 
+import co.com.sofka.questions.collections.Question;
 import co.com.sofka.questions.model.AnswerDTO;
+import co.com.sofka.questions.model.QuestionDTO;
 import co.com.sofka.questions.reposioties.AnswerRepository;
+import co.com.sofka.questions.reposioties.QuestionRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -10,25 +13,39 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import reactor.core.publisher.Mono;
 
+import java.util.Arrays;
+
 @SpringBootTest
 class DeleteAnswerUseCaseTest {
     @SpyBean
-    DeleteAnswerUseCase deleteAnswerUseCase;
+    DeleteUseCase deleteUseCase;
+
+    @MockBean
+    QuestionRepository questionRepository;
 
     @MockBean
     AnswerRepository answerRepository;
 
     @Test
-    void deleteTest(){
-        var answerDTO = new AnswerDTO("xxx","yyy","yyy","Que es java");
-        Mockito.when(answerRepository.deleteById(answerDTO.getId())).thenReturn(Mono.empty());
+    void deleteQuestionTest() {
+        var resourceDT0 = new QuestionDTO("xxx", "yyy", "Que es Java?", "tecnologia",
+                "TECNOLOGIA", 1, 2, Arrays.asList("xxx1", "xxx2"), "daniela.03v@gmail.com");
 
-        var dataEmpty = deleteAnswerUseCase.apply(answerDTO.getId()).thenReturn(Mono.empty());
+        var resource = new Question();
+        resource.setId("xxx");
+        resource.setUserId("yyy");
+        resource.setQuestion("Que es Java?");
+        resource.setType("tecnologia");
+        resource.setCategory("TECNOLOGIA");
+        resource.setNumberOfReviews(1);
+        resource.setSumOfReviewScores(1);
+        resource.setUserReviews(Arrays.asList("xxx1", "xxx2"));
+        resource.setUserEmail("daniela.03v@gmail.com");
 
-        Assertions.assertEquals(dataEmpty.block(), Mono.empty());
+        Mockito.when(questionRepository.deleteById("xxx")).thenReturn(Mono.empty());
+        Mockito.when(answerRepository.deleteByQuestionId("xxx")).thenReturn(Mono.empty());
+
+        var result = deleteUseCase.apply("xxx").block();
+        Assertions.assertEquals(result,null);
     }
 }
-
-
-
-
