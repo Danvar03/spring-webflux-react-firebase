@@ -27,13 +27,21 @@ class AddAnswerUseCaseTest {
     @Test
     @DisplayName("consultar respuestas CRUD use case")
     public void setAddAnswerUseCaseTest(){
-        var answerDTO = new AnswerDTO("1","2", "11", "Medellin");
+        var answerDTO = new AnswerDTO("zzz","xxx", "yyy", "Desarollar");
         var answer = new Answer();
-        answer.setQuestionId("1");
-        answer.setAnswer("Medellin");
-        answer.setUserId("11");
+        answer.setId("zzz");
+        answer.setQuestionId("xxx");
+        answer.setUserId("yyy");
+        answer.setAnswer("Desarollar");
+
 
         Mockito.when(answerRepository.save(Mockito.any(Answer.class))).thenReturn(Mono.just(answer));
+        var  datoAnswer = addAnswerUseCase.apply(answerDTO).block();
+        Assertions.assertEquals(datoAnswer.getId(), "zzz");
+        Assertions.assertEquals(datoAnswer.getId(), "xxx");
+        Assertions.assertEquals(datoAnswer.getUserId(), "yyy");
+        Assertions.assertEquals(datoAnswer.getAnswers(), "Desarollar");
+
 
     }
 }
