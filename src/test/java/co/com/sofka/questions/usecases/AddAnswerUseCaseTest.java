@@ -31,15 +31,15 @@ class AddAnswerUseCaseTest {
 
     @Test
     void answerTest(){
-        var resource = new QuestionDTO("xxx", "yyy", "Que es Java?", "tecnologia",
+        var resource = new QuestionDTO("xxx", "xxx", "Que es Java?", "tecnologia",
                 "TECNOLOGIA", 1, 2, Arrays.asList("xxx1", "xxx2"), "daniela.03v@gmail.com");
 
-        var answerDTO = new AnswerDTO("xxx","yyy","yyy","test");
+        var answerDTO = new AnswerDTO("xxx","yyy","yyy","Java");
         var answer = new Answer();
         answer.setId("01");
-        answer.setQuestionId("01");
-        answer.setUserId("u01");
-        answer.setAnswer("test");
+        answer.setQuestionId("yyy");
+        answer.setUserId("xxx");
+        answer.setAnswer("Java");
         Mockito.when(answerRepository.save(Mockito.any(Answer.class))).thenReturn(Mono.just(answer));
         Mockito.when(getUseCase.apply(Mockito.anyString())).thenReturn(Mono.just(resource));
         var reusultDTO = addAnswerUseCase.apply(answerDTO);
